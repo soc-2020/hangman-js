@@ -4,129 +4,22 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <style>
-        div {
-            padding-top: 10px;
-        }
-        div#result {
-            color: red;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        span#word {
-            font-size: 1.3em;
-        }
-        span#valid {
-            font-weight: bold;
-            color: blue;
-        }
-        span#invalid {
-            font-weight: bold;
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
     <h1>Hangman</h1>
     <div><button id="startOver" onclick="startOver()">Start</button></div>
-    <div>Type a letter:
-        <input id="letter" type="text" size="2"> <button id="playBtn" onclick="play()">Check</button>
-    </div>
-    <div>Word: <span id="word"></span></div>
-    <div>Valid letters: <span id="valid"></span></div>
-    <div>Invalid letters: <span id="invalid"></span></div>
+
+    <div id="word"></div>
+    <div id="letter-list"></div>
+
     <div id="result"></div>
 
-    <script>
+    <canvas></canvas>
 
-        let words = ["mississippi", "concatenate", "normalization", "decentralized"];
-        let word = "";
-        let validLetters = [];
-        let invalidLetters = [];
-
-        function startOver() {
-            validLetters = [];
-            invalidLetters = [];
-            word = words[Math.floor(Math.random() * words.length)];
-            document.getElementById("playBtn").disabled = false;
-            document.getElementById("letter").disabled = false;
-            document.getElementById("result").innerHTML = "";
-            displaySecretWord();
-            displayValidLetters();
-            displayInvalidLetters();
-        }
-
-        function displaySecretWord() {
-            let d = document.getElementById("word");
-            let txt = word.charAt(0);
-            for (var i = 1; i < word.length-1; i++) {
-                if(validLetters.includes(word.charAt(i))) {
-                    txt += ' ' + word.charAt(i)
-                }
-                else {
-                    txt += ' _';
-                }
-            }
-            txt += ' ' + word.charAt(word.length-1);
-            d.innerHTML = txt;
-        }
-
-        function displayValidLetters() {
-            let txt = "";
-            validLetters.forEach(x => {
-                txt += x + " ";
-            });
-            document.getElementById("valid").innerHTML = txt;
-        }
-
-        function displayInvalidLetters() {
-            let txt = "";
-            invalidLetters.forEach(x => {
-                txt += x + " ";
-            });
-            document.getElementById("invalid").innerHTML = txt;
-        }
-
-        function play() {
-            let ch = document.getElementById("letter").value;
-
-            document.getElementById("letter").value = "";
-            if(validLetters.includes(ch) || invalidLetters.includes(ch)) {
-                // already selected
-                return;
-            }
-
-            if(word.includes(ch)) {
-                validLetters.push(ch);
-            }
-            else {
-                invalidLetters.push(ch);
-            }
-
-            displaySecretWord();
-            displayValidLetters();
-            displayInvalidLetters();
-            checkIfFound();
-        }
-
-        function checkIfFound() {
-            let w = document.getElementById("word").innerHTML;
-            w = w.replace(/\s/g, '');
-            if(word == w) {
-                document.getElementById("result").innerHTML = "FOUND!";
-                document.getElementById("playBtn").disabled = true;
-                document.getElementById("letter").disabled = true;
-            }
-            else if(invalidLetters.length >= 6) {
-                document.getElementById("result").innerHTML = "LOST!";
-                document.getElementById("playBtn").disabled = true;
-                document.getElementById("letter").disabled = true;
-            }
-        }
-
-    </script>
+    <script type="text/javascript" src="hangman.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,32 @@
+div {
+    padding-top: 10px;
+}
+div#result {
+    color: red;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+div#word {
+    font-size: 1.4em;
+}
+div#letter-list {
+    font-size: 1.5em;
+}
+div#letter-list a,  div#letter-list span {
+    margin-right: 15px;
+    padding: 3px;
+}
+.valid-letter {
+    color: green;
+    background-color: lightgrey;
+    font-weight: bolder;
+}
+.invalid-letter {
+    color: red;
+    background-color: lightgrey;
+    font-weight: bolder;
+}
+canvas {
+    border: solid 1px black;
+    height: 30%;
+}
