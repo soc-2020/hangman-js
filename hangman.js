@@ -91,6 +91,8 @@ function drawCanvas() {
     let canvas = document.querySelector('canvas');
     let context = canvas.getContext('2d');
 
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     context.fillRect(10, 120, 100, 10);
     context.fillRect(20, 20, 7, 100);
     context.fillRect(20, 20, 50, 7);
