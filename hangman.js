@@ -67,8 +67,9 @@ function playLetter(i) {
 
     displaySecretWord();
     displayLetters();
-    drawCanvas();
+
     checkIfFound();
+    drawCanvas();
 }
 
 
