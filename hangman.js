@@ -8,11 +8,23 @@ function startOver() {
     gameOver = false;
     validLetters = [];
     invalidLetters = [];
-    word = words[Math.floor(Math.random() * words.length)];
-    document.getElementById("result").innerHTML = "";
-    displaySecretWord();
-    displayLetters();
-    drawCanvas();
+    let request = new XMLHttpRequest()
+    request.open('GET', 'https://random-word-api.herokuapp.com/word?number=1', true)
+    request.onload = function () {
+        let data = JSON.parse(this.response)
+        if (request.status >= 200 && request.status < 400) {
+            word = data[0];
+            document.getElementById("result").innerHTML = "";
+            displaySecretWord();
+            displayLetters();
+            drawCanvas();
+        }
+        else {
+            alert("Error");
+        }
+    };
+    request.send();
+
 }
 
 function displaySecretWord() {
